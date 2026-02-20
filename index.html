@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Amarillos</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#141414">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="preconnect" href="https://fran04x-amarillos-app-stream.hf.space">
+    
+    <link rel="stylesheet" href="https://cdn.vidstack.io/player/theme.css" />
+    <link rel="stylesheet" href="https://cdn.vidstack.io/player/video.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar-left">
+            <div id="logo-home" class="logo">LOS AMARILLOS</div>
+        </div>
+        <div class="nav-menu-wrap">
+            <button id="btn-nav-downloads" class="btn-menu" aria-label="Menú" aria-expanded="false" title="Menú">≡</button>
+            <div id="nav-menu" class="nav-menu" hidden>
+                <button id="menu-downloads" class="nav-menu-item" type="button">Mis Descargas</button>
+            </div>
+        </div>
+    </header>
+
+    <div id="home-view" class="view-section active">
+        <div class="home-header">
+            <h2 class="home-title">Recomendados</h2>
+            <div class="season-index-wrap">
+                <button id="season-prev" class="season-index-nav" aria-label="Temporadas anteriores">‹</button>
+                <div id="season-index" class="season-index"></div>
+                <button id="season-next" class="season-index-nav" aria-label="Temporadas siguientes">›</button>
+            </div>
+        </div>
+        <div id="home-grid" class="home-grid"></div>
+    </div>
+
+    <div id="downloads-view" class="view-section">
+        <h2 class="home-title">Mis Descargas (Offline)</h2>
+        <div id="downloads-grid" class="home-grid">
+            <p class="downloads-loading-text">Cargando bóveda...</p>
+        </div>
+    </div>
+
+    <div id="player-view" class="view-section">
+        <div class="layout-container">
+            <main class="main-content">
+                <div class="player-wrapper">
+                    <media-player id="player" load="eager" playsinline storage="amarillos-player">
+                        <media-provider></media-provider>
+                        <div class="vidstack-controls vidstack-ui-overlay">
+                            <div class="vidstack-progress-row">
+                                <input id="vidstack-seek-range" class="vidstack-seek-range" type="range" min="0" max="1000" step="1" value="0" aria-label="Progreso" />
+                            </div>
+
+                            <div class="vidstack-controls-row">
+                                <button id="vidstack-play-btn" class="vds-button vidstack-control-button" aria-label="Play / Pause">▶</button>
+
+                                <div class="vidstack-volume-wrap">
+                                    <button id="vidstack-mute-btn" class="vds-button vidstack-control-button" aria-label="Silenciar">🔊</button>
+                                    <input id="vidstack-volume-range" class="vidstack-volume-slider" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volumen" />
+                                </div>
+
+                                <div class="vidstack-time-wrap">
+                                    <span id="vidstack-time-current">0:00</span>
+                                    <span>/</span>
+                                    <span id="vidstack-time-duration">0:00</span>
+                                </div>
+
+                                <div class="vidstack-controls-spacer"></div>
+
+                                <button id="vidstack-autoplay-switch" class="vds-button vidstack-control-button vidstack-autoplay-switch" aria-label="Autoplay" aria-pressed="true">↻</button>
+
+                                <button id="vidstack-download-btn" class="vds-button vidstack-control-button" aria-label="Descargar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 16l-5-5h3V4h4v7h3l-5 5zm9-2v6H3v-6H1v8h22v-8h-2z"/>
+                                    </svg>
+                                </button>
+
+                                <div id="vidstack-settings" class="vidstack-settings">
+                                    <button id="vidstack-settings-btn" class="vds-button vidstack-control-button" aria-label="Ajustes" aria-expanded="false">⚙</button>
+                                    <div id="vidstack-settings-menu" class="vidstack-settings-menu" hidden>
+                                        <div class="vidstack-settings-title">Velocidad</div>
+                                        <button class="vidstack-speed-option" data-rate="0.75">0.75x</button>
+                                        <button class="vidstack-speed-option" data-rate="1">Normal</button>
+                                        <button class="vidstack-speed-option" data-rate="1.25">1.25x</button>
+                                        <button class="vidstack-speed-option" data-rate="1.5">1.5x</button>
+                                        <button class="vidstack-speed-option" data-rate="2">2x</button>
+                                    </div>
+                                </div>
+
+                                <button id="vidstack-fullscreen-btn" class="vds-button vidstack-control-button" aria-label="Pantalla completa">⛶</button>
+                            </div>
+                        </div>
+                        <div id="player-episode-title" class="vidstack-episode-title vidstack-ui-overlay"></div>
+                    </media-player>
+                </div>
+            </main>
+
+            <aside class="sidebar">
+                <div class="season-selector">
+                    <select id="season-select"></select>
+                </div>
+                <div id="episodes-grid" class="episodes-list"></div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script type="module" src="./app.js"></script>
+</body>
+</html>
